@@ -23,27 +23,27 @@ namespace InventoryManager.ViewModels
                 new SidebarTabItem()
                 {
                     Header = "Inicial",
-                    TabItemTemplate = SidebarTabItemTemplate.Dashboard
+                    TabItemTemplate = DashboardTabItemTemplate.Dashboard
                 },
                 new SidebarTabItem()
                 {
                     Header = "Entradas",
-                    TabItemTemplate = SidebarTabItemTemplate.Entries
+                    TabItemTemplate = DashboardTabItemTemplate.Entries
                 },
                 new SidebarTabItem()
                 {
                     Header = "Saídas",
-                    TabItemTemplate = SidebarTabItemTemplate.Outwards
+                    TabItemTemplate = DashboardTabItemTemplate.Outwards
                 },
                 new SidebarTabItem()
                 {
                     Header = "Cadastro",
-                    TabItemTemplate = SidebarTabItemTemplate.Records
+                    TabItemTemplate = DashboardTabItemTemplate.Records
                 },
                 new SidebarTabItem()
                 {
                     Header = "Relatórios",
-                    TabItemTemplate = SidebarTabItemTemplate.Reports
+                    TabItemTemplate = DashboardTabItemTemplate.Reports
                 },
             };
         }

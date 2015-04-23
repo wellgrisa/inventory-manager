@@ -22,19 +22,19 @@ namespace InventoryManager.ViewModels
 
         public ProductViewModel SelectedProduct { get; set; }
 
-        private ProductService _productService;
+        private ProductService<Product> _productService;
 
         public ICommand AddCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand SaveCommand { get; set; }
 
-        public EntriesViewModel(ProductService productService)
+        public EntriesViewModel(ProductService<Product> productService)
         {
             _productService = productService;
 
             EntryProducts = new ObservableCollection<ProductViewModel>(new List<ProductViewModel>());
 
-            Products = new ObservableCollection<Product>(productService.GetProducts());
+            Products = new ObservableCollection<Product>(productService.GetAll());
 
             AddCommand = new RelayCommand(AddCommandExecute);
 

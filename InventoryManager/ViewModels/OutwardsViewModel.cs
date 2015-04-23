@@ -37,8 +37,7 @@ namespace InventoryManager.ViewModels
         {
             Products.Add(new Product 
             {
-                Name = "Nome",
-                Description = "Descrição"
+                Name = "Nome"
             });
         }
 

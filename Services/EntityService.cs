@@ -51,6 +51,14 @@ namespace Services
             }
         }
 
+        public IEnumerable<T> GetAll<T>() where T : Entity
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                return db.Set<T>().ToList();
+            }
+        }
+
         //public virtual ICollection<ValidationResult> Validate<T>(T obj) where T : Entity
         //{
         //    var results = new List<ValidationResult>();
@@ -77,37 +85,24 @@ namespace Services
     }
 
     [Export]
-    public class ProductService : EntityService
+    public class ProductService<T> : EntityService where T: Entity
     {
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<T> GetAll()
         {
             using (var db = new ApplicationDbContext())
             {
-                return db.Products
-                    .OrderBy(o => o.Name)
-                    .ToList();
+                return db.Set<T>().ToList();
             }
-        }
+        }        
 
-        public Inventory GetInventoryByProduct(Product product)
+        public void Save(params T[] entities)
         {
             using (var db = new ApplicationDbContext())
             {
-                return db.Inventory.FirstOrDefault(x => x.Product.ID == product.ID);
-            }
-        }
-
-        public void UpdateInventoryByMoviment(Moviment moviment)
-        {
-            if (moviment.ChangeInventory)
-            {
-                foreach (var productMoviment in moviment.Products)
+                foreach (var entity in entities)
                 {
-                    var inventory = GetInventoryByProduct(productMoviment.Product) ?? new Inventory();
-
-                    moviment.InventoryAction(inventory, productMoviment);
-
-                    Save(inventory);
+                    db.Set<T>().Add(entity);
+                    db.SaveChanges();
                 }
             }
         }

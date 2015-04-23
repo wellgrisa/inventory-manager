@@ -24,13 +24,16 @@ namespace DataProvider
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+
         public DbSet<ProductMoviment> ProductMoviments { get; set; }
         
         public DbSet<Entry> Entries { get; set; }
 
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
 
-        public DbSet<Inventory> Inventory { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

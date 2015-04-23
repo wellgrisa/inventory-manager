@@ -1,4 +1,6 @@
-﻿using InventoryManager.ViewModels;
+﻿using Domain;
+using InventoryManager.ViewModels;
+using InventoryManager.ViewModels.Records;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -18,11 +20,35 @@ namespace InventoryManager
             }
         }
 
+        public RecordsProductsViewModel RecordsProductsViewModel 
+        {
+            get 
+            {
+                return new RecordsProductsViewModel(); 
+            } 
+        }
+
+        public RecordsCategoriesViewModel RecordsCategoriesViewModel
+        {
+            get
+            {
+                return new RecordsCategoriesViewModel();
+            }
+        }
+
+        public RecordsUnitOfMeasuresViewModel RecordsUnitOfMeasuresViewModel 
+        {
+            get
+            {
+                return new RecordsUnitOfMeasuresViewModel();
+            }
+        }        
+
         public EntriesViewModel EntriesViewModel
         {
             get
             {
-                return new EntriesViewModel(new ProductService());
+                return new EntriesViewModel(new ProductService<Product>());
             }
         }
 
@@ -31,14 +57,6 @@ namespace InventoryManager
             get
             {
                 return new RecordsViewModel();
-            }
-        }
-
-        public CreateEditProductViewModel CreateEditProductViewModel
-        {
-            get
-            {
-                return new CreateEditProductViewModel(new ProductService());
             }
         }
 

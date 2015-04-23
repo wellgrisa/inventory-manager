@@ -10,6 +10,7 @@ namespace DataProvider.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "DataProvider.ApplicationDbContext";
         }
 

@@ -23,9 +23,7 @@ namespace InventoryManager.ViewModels
         public T CurrentEntity { get; set; }
 
         public ICommand SaveCommand { get; set; }
-
-        protected TempFlyoutResolver Flyout { get; set; }
-
+                
         public virtual string ConfirmationMessage
         {
             get
@@ -60,11 +58,7 @@ namespace InventoryManager.ViewModels
             {
                 var affectedRecords = _entityService.Save(CurrentEntity);
 
-                IsSaved = affectedRecords > 0;                
-
-                var flyout = sender.Flyouts.Items[(int)Flyout] as Flyout;
-
-                flyout.IsOpen = false;
+                IsSaved = affectedRecords > 0;
             }
         }
     }

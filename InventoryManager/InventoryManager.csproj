@@ -80,9 +80,12 @@
     <Compile Include="Util\TabTemplateSelector.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\CreateEditEntityViewModel.cs" />
-    <Compile Include="ViewModels\CreateEditProductViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\RecordsViewModel.cs" />
+    <Compile Include="ViewModels\Records\RecordBaseViewModel.cs" />
+    <Compile Include="ViewModels\Records\RecordsUnitOfMeasuresViewModel.cs" />
+    <Compile Include="ViewModels\Records\RecordsCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\Records\RecordsProductsViewModel.cs" />
+    <Compile Include="ViewModels\Records\RecordsViewModel.cs" />
     <Compile Include="ViewModels\OutwardsViewModel.cs" />
     <Compile Include="ViewModels\EntriesViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
@@ -97,8 +100,17 @@
     <Compile Include="Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Records.xaml.cs">
-      <DependentUpon>Records.xaml</DependentUpon>
+    <Compile Include="Views\RecordsView\UnitOfMeasures.xaml.cs">
+      <DependentUpon>UnitOfMeasures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecordsView\Categories.xaml.cs">
+      <DependentUpon>Categories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecordsView\Products.xaml.cs">
+      <DependentUpon>Products.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecordsView\DashboardRecords.xaml.cs">
+      <DependentUpon>DashboardRecords.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Outwards.xaml.cs">
       <DependentUpon>Outwards.xaml</DependentUpon>
@@ -146,7 +158,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Records.xaml">
+    <Page Include="Views\RecordsView\UnitOfMeasures.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RecordsView\Categories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecordsView\Products.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecordsView\DashboardRecords.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

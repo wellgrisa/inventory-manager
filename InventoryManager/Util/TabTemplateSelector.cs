@@ -15,10 +15,9 @@ namespace InventoryManager.Util
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var sidebarTabItem = item as SidebarTabItem;
-
-            Window window = Application.Current.MainWindow;
-
-            return window.FindResource(sidebarTabItem.TabItemTemplate.ToString()) as DataTemplate;
+                        
+            return (container as FrameworkElement)
+                .FindResource(sidebarTabItem.TabItemTemplate.ToString()) as DataTemplate;
         }
     }
 }

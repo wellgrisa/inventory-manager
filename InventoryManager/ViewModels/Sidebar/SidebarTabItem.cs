@@ -13,7 +13,7 @@ namespace InventoryManager.ViewModels.Sidebar
         /// </summary>
         public string Header { get; set; }
 
-        public SidebarTabItemTemplate TabItemTemplate { get; set; }
+        public Enum TabItemTemplate { get; set; }
 
         public override string ToString()
         {

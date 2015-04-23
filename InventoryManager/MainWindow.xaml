@@ -34,14 +34,11 @@
         </DataTemplate>        
 
         <DataTemplate x:Key="Records">
-            <views:Records/>
-        </DataTemplate>
-
-        <DataTemplate x:Key="Reports">
-            <views:Records/>
+            <views:DashboardRecords/>
         </DataTemplate>
 
         <util:TabTemplateSelector x:Key="TabSelector" />
+        
     </Controls:MetroWindow.Resources>
 
     <Grid>

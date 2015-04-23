@@ -6,12 +6,21 @@ using System.Threading.Tasks;
 
 namespace InventoryManager.ViewModels.Sidebar
 {
-    public enum SidebarTabItemTemplate
+    public enum DashboardTabItemTemplate
     {
         Dashboard,
         Entries,
         Outwards,
         Records,
         Reports,
+    }
+
+    public enum RecordsTabItemTemplate
+    {
+        Products,
+        Categories,
+        UnitOfMeasures,
+        Customers,
+        Suppliers
     }
 }
