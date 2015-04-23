@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventoryManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Product_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductMoviments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Product_ID" Type="int" />
+          <Property Name="Entry_ID" Type="int" />
+          <Property Name="PurchaseOrder_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MinimumQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MaximumQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PurchaseOrders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Inventories_dbo_Products_Product_ID">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Inventories" Type="Self.Inventories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Inventories">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductMoviments_dbo_Entries_Entry_ID">
+          <End Role="Entries" Type="Self.Entries" Multiplicity="0..1" />
+          <End Role="ProductMoviments" Type="Self.ProductMoviments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductMoviments">
+              <PropertyRef Name="Entry_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductMoviments_dbo_Products_Product_ID">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ProductMoviments" Type="Self.ProductMoviments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductMoviments">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductMoviments_dbo_PurchaseOrders_PurchaseOrder_ID">
+          <End Role="PurchaseOrders" Type="Self.PurchaseOrders" Multiplicity="0..1" />
+          <End Role="ProductMoviments" Type="Self.ProductMoviments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductMoviments">
+              <PropertyRef Name="PurchaseOrder_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryManagerModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entries" EntityType="Self.Entries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventories" EntityType="Self.Inventories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductMoviments" EntityType="Self.ProductMoviments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrders" EntityType="Self.PurchaseOrders" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Inventories_dbo_Products_Product_ID" Association="Self.FK_dbo_Inventories_dbo_Products_Product_ID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Inventories" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductMoviments_dbo_Entries_Entry_ID" Association="Self.FK_dbo_ProductMoviments_dbo_Entries_Entry_ID">
+            <End Role="Entries" EntitySet="Entries" />
+            <End Role="ProductMoviments" EntitySet="ProductMoviments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductMoviments_dbo_Products_Product_ID" Association="Self.FK_dbo_ProductMoviments_dbo_Products_Product_ID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductMoviments" EntitySet="ProductMoviments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductMoviments_dbo_PurchaseOrders_PurchaseOrder_ID" Association="Self.FK_dbo_ProductMoviments_dbo_PurchaseOrders_PurchaseOrder_ID">
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+            <End Role="ProductMoviments" EntitySet="ProductMoviments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ProductMoviments" Relationship="Self.FK_dbo_ProductMoviments_dbo_Entries_Entry_ID" FromRole="Entries" ToRole="ProductMoviments" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_Inventories_dbo_Products_Product_ID" FromRole="Inventories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ProductMoviment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" />
+          <Property Name="Entry_ID" Type="Int32" />
+          <Property Name="PurchaseOrder_ID" Type="Int32" />
+          <NavigationProperty Name="Entry" Relationship="Self.FK_dbo_ProductMoviments_dbo_Entries_Entry_ID" FromRole="ProductMoviments" ToRole="Entries" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ProductMoviments_dbo_Products_Product_ID" FromRole="ProductMoviments" ToRole="Products" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_dbo_ProductMoviments_dbo_PurchaseOrders_PurchaseOrder_ID" FromRole="ProductMoviments" ToRole="PurchaseOrders" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MinimumQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MaximumQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Inventories" Relationship="Self.FK_dbo_Inventories_dbo_Products_Product_ID" FromRole="Products" ToRole="Inventories" />
+          <NavigationProperty Name="ProductMoviments" Relationship="Self.FK_dbo_ProductMoviments_dbo_Products_Product_ID" FromRole="Products" ToRole="ProductMoviments" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ProductMoviments" Relationship="Self.FK_dbo_ProductMoviments_dbo_PurchaseOrders_PurchaseOrder_ID" FromRole="PurchaseOrders" ToRole="ProductMoviments" />
+        </EntityType>
+        <Association Name="FK_dbo_ProductMoviments_dbo_Entries_Entry_ID">
+          <End Role="Entries" Type="Self.Entry" Multiplicity="0..1" />
+          <End Role="ProductMoviments" Type="Self.ProductMoviment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductMoviments">
+              <PropertyRef Name="Entry_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Inventories_dbo_Products_Product_ID">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Inventories" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Inventories">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductMoviments_dbo_Products_Product_ID">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductMoviments" Type="Self.ProductMoviment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductMoviments">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductMoviments_dbo_PurchaseOrders_PurchaseOrder_ID">
+          <End Role="PurchaseOrders" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="ProductMoviments" Type="Self.ProductMoviment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductMoviments">
+              <PropertyRef Name="PurchaseOrder_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Entries" EntityType="Self.Entry" />
+          <EntitySet Name="Inventories" EntityType="Self.Inventory" />
+          <EntitySet Name="ProductMoviments" EntityType="Self.ProductMoviment" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="PurchaseOrders" EntityType="Self.PurchaseOrder" />
+          <AssociationSet Name="FK_dbo_ProductMoviments_dbo_Entries_Entry_ID" Association="Self.FK_dbo_ProductMoviments_dbo_Entries_Entry_ID">
+            <End Role="Entries" EntitySet="Entries" />
+            <End Role="ProductMoviments" EntitySet="ProductMoviments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Inventories_dbo_Products_Product_ID" Association="Self.FK_dbo_Inventories_dbo_Products_Product_ID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Inventories" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductMoviments_dbo_Products_Product_ID" Association="Self.FK_dbo_ProductMoviments_dbo_Products_Product_ID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductMoviments" EntitySet="ProductMoviments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductMoviments_dbo_PurchaseOrders_PurchaseOrder_ID" Association="Self.FK_dbo_ProductMoviments_dbo_PurchaseOrders_PurchaseOrder_ID">
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+            <End Role="ProductMoviments" EntitySet="ProductMoviments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryManagerModelStoreContainer" CdmEntityContainer="InventoryManagerEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="InventoryManagerModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entries">
+            <EntityTypeMapping TypeName="InventoryManagerModel.Entry">
+              <MappingFragment StoreEntitySet="Entries">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="InventoryManagerModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductMoviments">
+            <EntityTypeMapping TypeName="InventoryManagerModel.ProductMoviment">
+              <MappingFragment StoreEntitySet="ProductMoviments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Entry_ID" ColumnName="Entry_ID" />
+                <ScalarProperty Name="PurchaseOrder_ID" ColumnName="PurchaseOrder_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="InventoryManagerModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MinimumQuantity" ColumnName="MinimumQuantity" />
+                <ScalarProperty Name="MaximumQuantity" ColumnName="MaximumQuantity" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrders">
+            <EntityTypeMapping TypeName="InventoryManagerModel.PurchaseOrder">
+              <MappingFragment StoreEntitySet="PurchaseOrders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

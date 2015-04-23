@@ -1,0 +1,239 @@
+﻿<UserControl x:Class="InventoryManager.Views.Records"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:converters="clr-namespace:InventoryManager.Converters"
+             xmlns:views="clr-namespace:InventoryManager.Views"
+             mc:Ignorable="d"
+             DataContext="{Binding RecordsViewModel, Source={StaticResource ViewModelLocator}}">
+    <UserControl.Resources>
+        <converters:ToggleVisibilityConverter x:Key="ToggleVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+        <TabControl Grid.Column="1" Controls:TabControlHelper.IsUnderlined="True">
+            <TabItem Name="Entries" Header="Fornecedor"
+                                 Controls:ControlsHelper.HeaderFontSize="18">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>                        
+                    </Grid.RowDefinitions>
+
+                    <ToolBar Grid.ColumnSpan="2">                        
+                        <Button Width="50"
+                                        Height="50"
+                                        Margin="0, 10, 0, 0"
+                                        Style="{DynamicResource MetroCircleButtonStyle}"
+                                        ToolTip="Salvar Fornecedor" 
+                                        Command="{Binding AddSupplierCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+                            <!--<Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard>
+                                        <Storyboard >
+                                            <DoubleAnimation Storyboard.TargetName="SupplierDetails" Storyboard.TargetProperty="Opacity" 
+                                                To="0" From="1"
+                                                AutoReverse="True"
+                                                Duration="0:0:0.5" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SupplierDetails"
+                                                 Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5"   
+                                                      Value="{Binding ElementName=SupplierDetails, Path=Visibility, Converter={StaticResource ToggleVisibilityConverter}}" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <DoubleAnimation Storyboard.TargetName="SaveSupplier" Storyboard.TargetProperty="Opacity" 
+                                                To="0" From="1"
+                                                AutoReverse="True"
+                                                Duration="0:0:0.5" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SaveSupplier"
+                                                 Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5"   
+                                                      Value="{Binding ElementName=SupplierDetails, Path=Visibility, Converter={StaticResource ToggleVisibilityConverter}}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>-->
+
+                            <Rectangle Width="20"
+                                            Height="20"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"
+                                                Visual="{DynamicResource appbar_add}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>
+                    </ToolBar>
+
+                    <Controls:Tile Grid.Row="1" x:Name="mahTileExit" Title="Exit" Width="100" Height="100" TiltFactor ="4" VerticalAlignment="Top" HorizontalAlignment="Center" Command="{Binding TestCommand}">
+                        <Rectangle Fill="White" Height="45" Width="45">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_door_leave}" Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Controls:Tile>
+                </Grid>
+            </TabItem>
+            <TabItem Name="Customer" Header="Cliente / Requisitante"
+                                 Controls:ControlsHelper.HeaderFontSize="18">
+                <ContentControl Content="{Binding Test}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type views:Entries}">
+                            <views:Entries/>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+                <!--<Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ToolBar Grid.ColumnSpan="2">
+                        <Button Width="50"
+                                        Height="50"
+                                        Margin="0, 10, 0, 0"
+                                        Style="{DynamicResource MetroCircleButtonStyle}"
+                                        ToolTip="Salvar Fornecedor"
+                                        Command="{Binding SaveCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+                            <Rectangle Width="20"
+                                            Height="20"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"
+                                                Visual="{DynamicResource appbar_save}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>
+                    </ToolBar>
+
+                    <Label Grid.Row="1" Content="Razão Social"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" 
+                             Controls:TextBoxHelper.Watermark="Razão Social" />
+
+                    <Label Grid.Row="2" Content="Nome Fantasia" />
+                    <TextBox Grid.Row="2" Grid.Column="1"                         
+                         Controls:TextBoxHelper.Watermark="Nome Fantasia"
+                         Margin="0,2,0,0" />
+
+                    <Label Grid.Row="3" Content="CNPJ - CPF" />
+                    <TextBox Grid.Row="3" Grid.Column="1" 
+                             Controls:TextBoxHelper.Watermark="CNPJ - CPF" />
+
+                    <Label Grid.Row="4" Content="Endereço" />
+                    <TextBox Grid.Row="4" Grid.Column="1" 
+                             Controls:TextBoxHelper.Watermark="Endereço" />
+
+                    <Label Grid.Row="5" Content="Telefone" />
+                    <TextBox Grid.Row="5" Grid.Column="1" 
+                             Controls:TextBoxHelper.Watermark="Telefone" />
+
+                </Grid>-->
+            </TabItem>
+            <TabItem Header="Produto"
+                                 Controls:ControlsHelper.HeaderFontSize="18">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ToolBar Grid.ColumnSpan="2">
+                        <Button Width="50"
+                                        Height="50"
+                                        Margin="0, 10, 0, 0"
+                                        Style="{DynamicResource MetroCircleButtonStyle}"
+                                        ToolTip="Adicionar Produto" 
+                                        Command="{Binding AddProductCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+                           
+                            <Rectangle Width="20"
+                                            Height="20"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"
+                                                Visual="{DynamicResource appbar_add}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>
+                        <Button Width="50"
+                                        Height="50"
+                                        Margin="0, 10, 0, 0"
+                                        Style="{DynamicResource MetroCircleButtonStyle}"
+                                        ToolTip="Adicionar Produto" 
+                                        Command="{Binding RefreshCommand}"
+                                        CommandParameter="{Binding Products}">
+
+                            <Rectangle Width="20"
+                                            Height="20"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"
+                                                Visual="{DynamicResource appbar_refresh}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>
+                    </ToolBar>
+
+                    <DataGrid
+                        Name="EntriesProductsGrid"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
+                        RenderOptions.ClearTypeHint="Enabled"
+                        TextOptions.TextFormattingMode="Display"
+                        Margin="5"
+                        SelectionUnit="FullRow"
+                        ItemsSource="{Binding Path=Products, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"                            
+                        AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nome"
+                                    Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Descrição"
+                                    Binding="{Binding Description}" />
+                            <Controls:DataGridNumericUpDownColumn Header="Quantidade"
+                                                      Binding="{Binding Quantity}"                                                      
+                                                      Minimum="0" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,68 @@
+﻿<Controls:Flyout x:Class="InventoryManager.Views.CreateEditSupplier"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" 
+             Position="Right"
+             Theme="Inverse"
+             Header="Criar Fornecedor"
+             Width="800">
+    <Grid Name="SupplierDetails">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ToolBar Grid.ColumnSpan="2">            
+            <Button Name="SaveSupplier" Width="50"
+                                        Height="50"
+                                        Margin="0, 10, 0, 0"
+                                        Style="{DynamicResource MetroCircleButtonStyle}"
+                                        ToolTip="Salvar Fornecedor"
+                                        Command="{Binding SaveCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+                <Rectangle Width="20"
+                                            Height="20"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill"
+                                                Visual="{DynamicResource appbar_save}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </ToolBar>
+
+        <Label Grid.Row="1" Content="Razão Social"/>
+        <TextBox Grid.Row="1" Grid.Column="1" 
+                             Controls:TextBoxHelper.Watermark="Razão Social" />
+
+        <Label Grid.Row="2" Content="Nome Fantasia" />
+        <TextBox Grid.Row="2" Grid.Column="1"                         
+                         Controls:TextBoxHelper.Watermark="Nome Fantasia"
+                         Margin="0,2,0,0" />
+
+        <Label Grid.Row="3" Content="CNPJ - CPF" />
+        <TextBox Grid.Row="3" Grid.Column="1" 
+                             Controls:TextBoxHelper.Watermark="CNPJ - CPF" />
+
+        <Label Grid.Row="4" Content="Endereço" />
+        <TextBox Grid.Row="4" Grid.Column="1" 
+                             Controls:TextBoxHelper.Watermark="Endereço" />
+
+        <Label Grid.Row="5" Content="Telefone" />
+        <TextBox Grid.Row="5" Grid.Column="1" 
+                             Controls:TextBoxHelper.Watermark="Telefone" />
+    </Grid>
+</Controls:Flyout>
