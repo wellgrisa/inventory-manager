@@ -4,77 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             DataContext="{Binding RecordsProductsViewModel, Source={StaticResource ViewModelLocator}}"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"             
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <ToolBar Grid.ColumnSpan="2">
-            <Button Width="50"
-                                        Height="50"
-                                        Margin="0, 10, 0, 0"
-                                        Style="{DynamicResource MetroCircleButtonStyle}"
-                                        ToolTip="Salvar Produtos"
-                                        Command="{Binding SaveCommand}"
-                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
-                <Rectangle Width="20"
-                                            Height="20"
-                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                    <Rectangle.OpacityMask>
-                        <VisualBrush Stretch="Fill"
-                                                Visual="{DynamicResource appbar_save}" />
-                    </Rectangle.OpacityMask>
-                </Rectangle>
-            </Button>
-            <Button Width="50"
-                                        Height="50"
-                                        Margin="0, 10, 0, 0"
-                                        Style="{DynamicResource MetroCircleButtonStyle}"
-                                        ToolTip="Adicionar Categoria" 
-                                        Command="{Binding AddCommand}"
-                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
-
-                <Rectangle Width="20"
-                                            Height="20"
-                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                    <Rectangle.OpacityMask>
-                        <VisualBrush Stretch="Fill"
-                                                Visual="{DynamicResource appbar_add}" />
-                    </Rectangle.OpacityMask>
-                </Rectangle>
-            </Button>
-            <Button Width="50"
-                                        Height="50"
-                                        Margin="0, 10, 0, 0"
-                                        Style="{DynamicResource MetroCircleButtonStyle}"
-                                        ToolTip="Adicionar Produto" 
-                                        Command="{Binding RefreshCommand}"
-                                        CommandParameter="{Binding Products}">
-
-                <Rectangle Width="20"
-                                            Height="20"
-                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                    <Rectangle.OpacityMask>
-                        <VisualBrush Stretch="Fill"
-                                                Visual="{DynamicResource appbar_refresh}" />
-                    </Rectangle.OpacityMask>
-                </Rectangle>
-            </Button>
-        </ToolBar>
 
         <DataGrid
                         Name="EntriesProductsGrid"
@@ -91,7 +23,7 @@
                         AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nome"
-                                    Binding="{Binding Name}" />                
+                                    Binding="{Binding Name}" />
 
                 <Controls:DataGridNumericUpDownColumn Header="Quantidade"
                                                       Binding="{Binding Quantity}"                                                      
@@ -106,14 +38,15 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox Width="200"                                                  
-                                                  Style="{DynamicResource VirtualisedMetroComboBox}"
-                                                  Controls:TextBoxHelper.Watermark="Categoria"
-                                                  DisplayMemberPath="Name"
-                                                  IsEditable="True"                                                      
-                                                  ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                                  SelectedValue="{Binding Path=ID}"
-                                                  SelectedValuePath="ID"
-                                                  Text="{Binding Path=Name}" />
+                                Style="{DynamicResource VirtualisedMetroComboBox}"
+                                Controls:TextBoxHelper.Watermark="Categoria"
+                                DisplayMemberPath="Name"
+                                IsEditable="True"                                                      
+                                ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                                SelectedValue="{Binding Path=CategoryID}"
+                                IsSynchronizedWithCurrentItem="False"
+                                SelectedValuePath="ID"
+                                Text="{Binding Path=Category.Name}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
@@ -132,13 +65,14 @@
                                                   DisplayMemberPath="Name"
                                                   IsEditable="True"                                                      
                                                   ItemsSource="{Binding DataContext.UnitOfMeasures, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                                  SelectedValue="{Binding Path=ID}"
+                                                  SelectedValue="{Binding Path=UnitOfMeasureID}"
+                                                  IsSynchronizedWithCurrentItem="False"
                                                   SelectedValuePath="ID"
-                                                  Text="{Binding Path=Name}" />
+                                                  Text="{Binding Path=UnitOfMeasure.Name}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                
+
             </DataGrid.Columns>
         </DataGrid>
 

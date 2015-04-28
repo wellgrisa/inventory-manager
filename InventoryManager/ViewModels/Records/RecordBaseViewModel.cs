@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InventoryManager.ViewModels.Records
@@ -17,11 +18,13 @@ namespace InventoryManager.ViewModels.Records
         public ICommand RemoveCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand AddCommand { get; set; }
-        public ICommand RefreshCommand { get; set; }    
+        public ICommand RefreshCommand { get; set; }
 
         public ObservableCollection<T> Entities { get; set; }
 
-        public T SelectedEntity{ get; set; }
+        private T _selectedEntity;
+
+        public T SelectedEntity { get { return _selectedEntity; } set { _selectedEntity = value; } }
 
         protected ProductService<T> _productService;
 
@@ -29,15 +32,20 @@ namespace InventoryManager.ViewModels.Records
         {
             _productService = new ProductService<T>();
 
-            Entities = new ObservableCollection<T>(_productService.GetAll());
+            Entities = PopulateEntities();
 
-            RemoveCommand = new RelayCommand(RemoveCommandExecute, o => SelectedEntity!= null);
+            RemoveCommand = new RelayCommand(RemoveCommandExecute, o => SelectedEntity != null);
 
             SaveCommand = new RelayCommand(SaveCommandExecute);
 
             AddCommand = new RelayCommand(AddCommandExecute);
 
             RefreshCommand = new RelayCommand(RefreshExecute);
+        }
+
+        public virtual ObservableCollection<T> PopulateEntities()
+        {
+            return new ObservableCollection<T>(_productService.GetAll());
         }
 
         private void RemoveCommandExecute(object obj)
@@ -56,7 +64,7 @@ namespace InventoryManager.ViewModels.Records
 
         public virtual void OnSave()
         {
-            _productService.Save(Entities.ToArray());
+            _productService.SaveEntities(Entities.ToArray());
         }
 
         private void RefreshExecute(object obj)
@@ -85,6 +93,6 @@ namespace InventoryManager.ViewModels.Records
             {
                 OnSave();
             }
-        }     
+        }
     }
 }

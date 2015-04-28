@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Moviment.cs" />
+    <Compile Include="Supplier.cs" />
     <Compile Include="ProductMoviment.cs" />
     <Compile Include="PurchaseOrder.cs" />
     <Compile Include="Entry.cs" />

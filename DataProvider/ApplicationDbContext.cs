@@ -14,7 +14,7 @@ namespace DataProvider
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
         public static ApplicationDbContext Create()
@@ -23,6 +23,10 @@ namespace DataProvider
         }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
@@ -33,27 +37,5 @@ namespace DataProvider
         public DbSet<Entry> Entries { get; set; }
 
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
-
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<EntryProduct>().Map(m =>
-        //    {
-        //        m.MapInheritedProperties();
-        //        m.ToTable("EntriesProducts");
-        //    });
-
-        //    modelBuilder.Entity<OutwardProduct>().Map(m =>
-        //    {
-        //        m.MapInheritedProperties();
-        //        m.ToTable("OutwardsProducts");
-        //    });
-
-        //    modelBuilder.Entity<PurchaseOrderProduct>().Map(m =>
-        //    {
-        //        m.MapInheritedProperties();
-        //        m.ToTable("PurchaseOrdersProducts");
-        //    });
-        //}
     }
 }

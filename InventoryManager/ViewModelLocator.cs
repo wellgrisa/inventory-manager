@@ -42,7 +42,23 @@ namespace InventoryManager
             {
                 return new RecordsUnitOfMeasuresViewModel();
             }
-        }        
+        }
+
+        public RecordsSuppliersViewModel RecordsSuppliersViewModel 
+        {
+            get
+            {
+                return new RecordsSuppliersViewModel();
+            }
+        }
+
+        public RecordsCustomersViewModel RecordsCustomersViewModel
+        {
+            get
+            {
+                return new RecordsCustomersViewModel();
+            }
+        }    
 
         public EntriesViewModel EntriesViewModel
         {

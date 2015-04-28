@@ -87,22 +87,35 @@ namespace Services
     [Export]
     public class ProductService<T> : EntityService where T: Entity
     {
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(params string[] includeItems)
         {
             using (var db = new ApplicationDbContext())
             {
+                if (includeItems.Any())
+                {
+                    var dbSet = db.Set<T>();
+
+                    foreach (var include in includeItems)
+                    {
+                        dbSet.Include(include);
+                    }
+
+                    return dbSet.ToList();
+                }
+
                 return db.Set<T>().ToList();
             }
         }        
 
-        public void Save(params T[] entities)
+        public void SaveEntities(params T[] entities)
         {
             using (var db = new ApplicationDbContext())
             {
                 foreach (var entity in entities)
                 {
-                    db.Set<T>().Add(entity);
-                    db.SaveChanges();
+                    //db.Set<T>().Add(entity);
+                    Save(entity);
+                    //db.SaveChanges();
                 }
             }
         }
