@@ -97,7 +97,7 @@ namespace Services
 
                     foreach (var include in includeItems)
                     {
-                        dbSet.Include(include);
+                        dbSet.Include(include).ToList();
                     }
 
                     return dbSet.ToList();
@@ -140,3 +140,4 @@ namespace Services
         }
     }
 }
+//https://msdn.microsoft.com/en-us/data/jj574514.aspx

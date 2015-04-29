@@ -17,6 +17,7 @@
                         RenderOptions.ClearTypeHint="Enabled"
                         TextOptions.TextFormattingMode="Display"
                         Margin="5"
+                        CanUserAddRows="False"
                         SelectionUnit="FullRow"
                         ItemsSource="{Binding Path=Entities, Mode=TwoWay}"
                         SelectedItem="{Binding SelectedEntity, Mode=TwoWay}"                            
@@ -25,14 +26,10 @@
                 <DataGridTextColumn Header="Nome"
                                     Binding="{Binding Name}" />
 
-                <Controls:DataGridNumericUpDownColumn Header="Quantidade"
-                                                      Binding="{Binding Quantity}"                                                      
-                                                      Minimum="0" />
-
                 <DataGridTemplateColumn Header="Categoria">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Path=Category.Name}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
@@ -41,11 +38,12 @@
                                 Style="{DynamicResource VirtualisedMetroComboBox}"
                                 Controls:TextBoxHelper.Watermark="Categoria"
                                 DisplayMemberPath="Name"
-                                IsEditable="True"                                                      
-                                ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                SelectedValue="{Binding Path=CategoryID}"
                                 IsSynchronizedWithCurrentItem="False"
+                                IsEditable="True"                                                      
+                                ItemsSource="{Binding Path=DataContext.Categories, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                                SelectedValue="{Binding Path=CategoryID}"                                
                                 SelectedValuePath="ID"
+                                SelectedItem="{Binding Path=Category}" 
                                 Text="{Binding Path=Category.Name}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
@@ -54,21 +52,22 @@
                 <DataGridTemplateColumn Header="Unidade de Medida">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Path=UnitOfMeasure.Name}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox Width="200"                                                  
-                                                  Style="{DynamicResource VirtualisedMetroComboBox}"
-                                                  Controls:TextBoxHelper.Watermark="Unidade de Medida"
-                                                  DisplayMemberPath="Name"
-                                                  IsEditable="True"                                                      
-                                                  ItemsSource="{Binding DataContext.UnitOfMeasures, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                                  SelectedValue="{Binding Path=UnitOfMeasureID}"
-                                                  IsSynchronizedWithCurrentItem="False"
-                                                  SelectedValuePath="ID"
-                                                  Text="{Binding Path=UnitOfMeasure.Name}" />
+                                      Style="{DynamicResource VirtualisedMetroComboBox}"
+                                      Controls:TextBoxHelper.Watermark="Unidade de Medida"
+                                      DisplayMemberPath="Name"
+                                      IsEditable="True"      
+                                      IsSynchronizedWithCurrentItem="False"
+                                      ItemsSource="{Binding Path=DataContext.UnitOfMeasures, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                                      SelectedValue="{Binding Path=UnitOfMeasureID}"                                                  
+                                      SelectedValuePath="ID"
+                                      SelectedItem="{Binding Path=UnitOfMeasure}" 
+                                      Text="{Binding Path=UnitOfMeasure.Name}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
