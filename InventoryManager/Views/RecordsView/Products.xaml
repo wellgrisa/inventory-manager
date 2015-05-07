@@ -9,24 +9,28 @@
     <Grid>
 
         <DataGrid
-                        Name="EntriesProductsGrid"
-                        Grid.Row="1"
-                        Grid.ColumnSpan="2"
-                        HorizontalAlignment="Stretch" 
-                        VerticalAlignment="Stretch"
-                        RenderOptions.ClearTypeHint="Enabled"
-                        TextOptions.TextFormattingMode="Display"
-                        Margin="5"
-                        CanUserAddRows="False"
-                        SelectionUnit="FullRow"
-                        ItemsSource="{Binding Path=Entities, Mode=TwoWay}"
-                        SelectedItem="{Binding SelectedEntity, Mode=TwoWay}"                            
-                        AutoGenerateColumns="False">
+                 Grid.Row="1"
+                 Grid.ColumnSpan="2"
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch"
+                 RenderOptions.ClearTypeHint="Enabled"
+                 TextOptions.TextFormattingMode="Display"
+                 Margin="5"
+                 CanUserAddRows="False"
+                 SelectionUnit="FullRow"
+                 ItemsSource="{Binding Path=Entities, Mode=TwoWay}"
+                 SelectedItem="{Binding SelectedEntity, Mode=TwoWay}"                            
+                 AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nome"
+                                    Width="*"
                                     Binding="{Binding Name}" />
+                <Controls:DataGridNumericUpDownColumn Header="Quantidade Inicial"
+                                                      Binding="{Binding Quantity}"                                                      
+                                                      Minimum="0"
+                                                      Width="*"/>
 
-                <DataGridTemplateColumn Header="Categoria">
+                <DataGridTemplateColumn Header="Categoria" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Category.Name}" />
@@ -49,7 +53,7 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Unidade de Medida">
+                <DataGridTemplateColumn Header="Unidade de Medida" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=UnitOfMeasure.Name}" />

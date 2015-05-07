@@ -16,13 +16,14 @@
                         VerticalAlignment="Stretch"
                         RenderOptions.ClearTypeHint="Enabled"
                         TextOptions.TextFormattingMode="Display"
+                        CanUserAddRows="False"
                         Margin="5"
                         SelectionUnit="FullRow"
                         ItemsSource="{Binding Path=Entities, Mode=TwoWay}"
                         SelectedItem="{Binding SelectedEntity, Mode=TwoWay}"                            
                         AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nome"
+                <DataGridTextColumn Header="Nome" Width="*"
                                     Binding="{Binding Name}" />
             </DataGrid.Columns>
         </DataGrid>

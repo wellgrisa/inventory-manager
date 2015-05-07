@@ -20,11 +20,11 @@
     <DataTemplate DataType="{x:Type local:RecordsUnitOfMeasuresViewModel}">
       <records:UnitOfMeasures/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type local:RecordsCustomersViewModel}">
-      <records:Customers/>
+        <DataTemplate DataType="{x:Type local:RecordsPhysicalPeopleViewModel}">
+      <records:PhysicalPeople/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type local:RecordsSuppliersViewModel}">
-      <records:Suppliers/>
+        <DataTemplate DataType="{x:Type local:RecordsLegalPeopleViewModel}">
+      <records:LegalPeople/>
     </DataTemplate>
   </UserControl.Resources>
   <Grid>

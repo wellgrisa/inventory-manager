@@ -44,19 +44,19 @@ namespace InventoryManager
             }
         }
 
-        public RecordsSuppliersViewModel RecordsSuppliersViewModel 
+        public RecordsPhysicalPeopleViewModel RecordsSuppliersViewModel 
         {
             get
             {
-                return new RecordsSuppliersViewModel();
+                return new RecordsPhysicalPeopleViewModel();
             }
         }
 
-        public RecordsCustomersViewModel RecordsCustomersViewModel
+        public RecordsLegalPeopleViewModel RecordsCustomersViewModel
         {
             get
             {
-                return new RecordsCustomersViewModel();
+                return new RecordsLegalPeopleViewModel();
             }
         }    
 

@@ -14,6 +14,13 @@ namespace InventoryManager.ViewModels.Records
 {
     public class RecordsCategoriesViewModel : RecordBaseViewModel<Category>
     {
+        public  ObservableCollection<categoryViewModel> EntitiesA { get; set; }
+
+        public RecordsCategoriesViewModel()
+        {
+            EntitiesA = new ObservableCollection<categoryViewModel>();
+        }
+
         public override void AddCommandExecute(object obj)
         {
             Entities.Add(new Category
@@ -21,5 +28,16 @@ namespace InventoryManager.ViewModels.Records
                 Name = "Nome"
             });
         }
+
+        public override void OnSave()
+        {
+            base.OnSave();
+        }
+    }
+
+    [PropertyChanged.ImplementPropertyChanged]
+    public class categoryViewModel
+    {
+        public string Name { get; set; }
     }
 }

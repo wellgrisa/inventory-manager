@@ -86,7 +86,7 @@ namespace InventoryManager.ViewModels.Records
                 ColorScheme = MetroDialogColorScheme.Accented
             };
 
-            MessageDialogResult result = await sender.ShowMessageAsync("Confirmar", "Você deseja realmente salvar a Entrada realizada?",
+            MessageDialogResult result = await sender.ShowMessageAsync("Confirmar", "Você deseja realmente salvar?",
                MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
             if (result == MessageDialogResult.Affirmative)

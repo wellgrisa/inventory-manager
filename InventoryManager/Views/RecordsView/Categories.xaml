@@ -7,20 +7,20 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"             
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-       
+
         <DataGrid 
-                        HorizontalAlignment="Stretch" 
-                        VerticalAlignment="Stretch"
-                        RenderOptions.ClearTypeHint="Enabled"
-                        TextOptions.TextFormattingMode="Display"
-                        Margin="5"
-                        SelectionUnit="FullRow"
-                        ItemsSource="{Binding Path=Entities, Mode=TwoWay}"
-                        SelectedItem="{Binding SelectedEntity, Mode=TwoWay}"                            
-                        AutoGenerateColumns="False">
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch"
+            RenderOptions.ClearTypeHint="Enabled"
+            TextOptions.TextFormattingMode="Display"
+            Margin="5"            
+            SelectionUnit="FullRow"
+            ItemsSource="{Binding Path=Entities, Mode=TwoWay}"            
+            AutoGenerateColumns="False"
+            CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nome" Width="*"
-                                    Binding="{Binding Name}" />
+                                    Binding="{Binding Name, Mode=TwoWay}" />
             </DataGrid.Columns>
         </DataGrid>
 

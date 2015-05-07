@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EntityIdConverter.cs" />
     <Compile Include="Converters\ToggleVisibilityConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Util\TabTemplateSelector.cs" />
@@ -82,8 +83,8 @@
     <Compile Include="ViewModels\CreateEditEntityViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Records\RecordBaseViewModel.cs" />
-    <Compile Include="ViewModels\Records\RecordsCustomersViewModel.cs" />
-    <Compile Include="ViewModels\Records\RecordsSuppliersViewModel.cs" />
+    <Compile Include="ViewModels\Records\RecordsLegalPeopleViewModel.cs" />
+    <Compile Include="ViewModels\Records\RecordsPhysicalPeopleViewModel.cs" />
     <Compile Include="ViewModels\Records\RecordsUnitOfMeasuresViewModel.cs" />
     <Compile Include="ViewModels\Records\RecordsCategoriesViewModel.cs" />
     <Compile Include="ViewModels\Records\RecordsProductsViewModel.cs" />
@@ -102,11 +103,11 @@
     <Compile Include="Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RecordsView\Customers.xaml.cs">
-      <DependentUpon>Customers.xaml</DependentUpon>
+    <Compile Include="Views\RecordsView\LegalPeople.xaml.cs">
+      <DependentUpon>LegalPeople.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RecordsView\Suppliers.xaml.cs">
-      <DependentUpon>Suppliers.xaml</DependentUpon>
+    <Compile Include="Views\RecordsView\PhysicalPeople.xaml.cs">
+      <DependentUpon>PhysicalPeople.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecordsView\RecordBase.xaml.cs">
       <DependentUpon>RecordBase.xaml</DependentUpon>
@@ -169,11 +170,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RecordsView\Customers.xaml">
+    <Page Include="Views\RecordsView\LegalPeople.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\RecordsView\Suppliers.xaml">
+    <Page Include="Views\RecordsView\PhysicalPeople.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

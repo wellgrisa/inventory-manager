@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace InventoryManager.ViewModels.Records
 {
-    public class RecordsCustomersViewModel : RecordBaseViewModel<Customer>
+    public class RecordsLegalPeopleViewModel : RecordBaseViewModel<LegalPerson>
     {
         public override void AddCommandExecute(object obj)
         {
-            Entities.Add(new Customer
+            Entities.Add(new LegalPerson
             {
                 Name = "Nome"
             });

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace InventoryManager.Views.Records
 {
     /// <summary>
-    /// Interaction logic for Suppliers.xaml
+    /// Interaction logic for PhysicalPersons.xaml
     /// </summary>
-    public partial class Suppliers : UserControl
+    public partial class PhysicalPeople : UserControl
     {
-        public Suppliers()
+        public PhysicalPeople()
         {            
             InitializeComponent();
         }

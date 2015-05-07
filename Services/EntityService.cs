@@ -112,10 +112,8 @@ namespace Services
             using (var db = new ApplicationDbContext())
             {
                 foreach (var entity in entities)
-                {
-                    //db.Set<T>().Add(entity);
-                    Save(entity);
-                    //db.SaveChanges();
+                {                    
+                    Save(entity);                    
                 }
             }
         }
