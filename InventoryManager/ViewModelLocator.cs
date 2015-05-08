@@ -44,7 +44,7 @@ namespace InventoryManager
             }
         }
 
-        public RecordsPhysicalPeopleViewModel RecordsSuppliersViewModel 
+        public RecordsPhysicalPeopleViewModel RecordsPhysicalPeopleViewModel  
         {
             get
             {
@@ -52,7 +52,7 @@ namespace InventoryManager
             }
         }
 
-        public RecordsLegalPeopleViewModel RecordsCustomersViewModel
+        public RecordsLegalPeopleViewModel RecordsLegalPeopleViewModel
         {
             get
             {

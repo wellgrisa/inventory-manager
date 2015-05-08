@@ -35,9 +35,7 @@ namespace InventoryManager.ViewModels.Records
         {
             Entities.Add(new Product
             {
-                Name = "Nome",
-                UnitOfMeasure = new UnitOfMeasure(),
-                Category = new Category()
+                Name = "Nome"
             });
         }        
     }    

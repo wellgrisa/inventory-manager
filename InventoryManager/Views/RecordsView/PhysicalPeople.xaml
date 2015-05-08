@@ -30,7 +30,7 @@
                 <DataGridTemplateColumn Header="Data de Nascimento">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=DateOfBirth, StringFormat=f}" />
+                            <TextBlock Text="{Binding Path=DateOfBirth, StringFormat=d}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>

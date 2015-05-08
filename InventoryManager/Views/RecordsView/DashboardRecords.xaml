@@ -25,12 +25,12 @@
             <records:RecordBase DataContext="{Binding RecordsUnitOfMeasuresViewModel, Source={StaticResource ViewModelLocator}}"/>
         </DataTemplate>
 
-        <DataTemplate x:Key="Customers">
-            <records:RecordBase DataContext="{Binding RecordsCustomersViewModel, Source={StaticResource ViewModelLocator}}"/>
+        <DataTemplate x:Key="PhysicalPeople">
+            <records:RecordBase DataContext="{Binding RecordsPhysicalPeopleViewModel, Source={StaticResource ViewModelLocator}}"/>
         </DataTemplate>
 
-        <DataTemplate x:Key="Suppliers">
-            <records:RecordBase DataContext="{Binding RecordsSuppliersViewModel, Source={StaticResource ViewModelLocator}}"/>
+        <DataTemplate x:Key="LegalPeople">
+            <records:RecordBase DataContext="{Binding RecordsLegalPeopleViewModel, Source={StaticResource ViewModelLocator}}"/>
         </DataTemplate>
 
         <util:TabTemplateSelector x:Key="TabSelector" />

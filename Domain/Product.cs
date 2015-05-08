@@ -18,10 +18,10 @@ namespace Domain
 
         public int CategoryID { get; set; }
 
-        public virtual Category Category { get; set; }
+        public Category Category { get; set; }
 
         public int UnitOfMeasureID { get; set; }
 
-        public virtual UnitOfMeasure UnitOfMeasure { get; set; }
+        public UnitOfMeasure UnitOfMeasure { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace InventoryManager.ViewModels.Sidebar
         Products,
         Categories,
         UnitOfMeasures,
-        Customers,
-        Suppliers
+        PhysicalPeople,
+        LegalPeople
     }
 }

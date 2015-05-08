@@ -45,13 +45,13 @@ namespace InventoryManager.ViewModels
                 },
                 new SidebarTabItem()
                 {
-                    Header = "Clientes",
-                    TabItemTemplate = RecordsTabItemTemplate.Customers
+                    Header = "Pessoa Física",
+                    TabItemTemplate = RecordsTabItemTemplate.PhysicalPeople
                 },
                 new SidebarTabItem()
                 {
-                    Header = "Fornecedores",
-                    TabItemTemplate = RecordsTabItemTemplate.Suppliers
+                    Header = "Pessoa Jurídica",
+                    TabItemTemplate = RecordsTabItemTemplate.LegalPeople
                 },
             };
         }                          
