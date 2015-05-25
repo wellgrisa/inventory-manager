@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Outward.cs" />
     <Compile Include="Moviment.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="ProductMoviment.cs" />

@@ -7,7 +7,6 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"             
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-
         <DataGrid
                  Grid.Row="1"
                  Grid.ColumnSpan="2"
@@ -21,10 +20,22 @@
                  ItemsSource="{Binding Path=Entities, Mode=TwoWay}"
                  SelectedItem="{Binding SelectedEntity, Mode=TwoWay}"                            
                  AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <Style x:Key="CellStyleError" TargetType="{x:Type TextBlock}">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="ToolTip"
+                Value="{Binding RelativeSource={RelativeSource Self}, 
+                       Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nome"
                                     Width="*"
-                                    Binding="{Binding Name}" />
+                                    ElementStyle="{StaticResource ResourceKey=CellStyleError}"
+                                    Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
                 <Controls:DataGridNumericUpDownColumn Header="Quantidade Inicial"
                                                       Binding="{Binding Quantity}"                                                      
                                                       Minimum="0"
@@ -42,7 +53,7 @@
                                 Style="{DynamicResource VirtualisedMetroComboBox}"
                                 Controls:TextBoxHelper.Watermark="Categoria"
                                 DisplayMemberPath="Name"
-                                IsSynchronizedWithCurrentItem="True"
+                                IsSynchronizedWithCurrentItem="False"
                                 IsEditable="True"                                                      
                                 ItemsSource="{Binding Path=DataContext.Categories, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
                                 SelectedValue="{Binding Path=CategoryID}"                                
@@ -66,7 +77,7 @@
                                       Controls:TextBoxHelper.Watermark="Unidade de Medida"
                                       DisplayMemberPath="Name"
                                       IsEditable="True"      
-                                      IsSynchronizedWithCurrentItem="True"
+                                      IsSynchronizedWithCurrentItem="False"
                                       ItemsSource="{Binding Path=DataContext.UnitOfMeasures, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
                                       SelectedValue="{Binding Path=UnitOfMeasureID}"                                                  
                                       SelectedValuePath="ID"

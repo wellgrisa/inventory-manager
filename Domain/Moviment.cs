@@ -14,12 +14,11 @@ namespace Domain
             Products = new List<ProductMoviment>();
         }
 
-        [NotMapped]
-        public abstract bool ChangeInventory { get; }
-
-        [NotMapped]
-        public abstract Action<Inventory, ProductMoviment> InventoryAction { get; }
-
         public virtual ICollection<ProductMoviment> Products { get; set; }
+
+        public virtual void ProductMovimentAction(ProductMoviment productMoviment)
+        {
+
+        }
     }
 }

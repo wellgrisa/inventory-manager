@@ -68,6 +68,14 @@ namespace InventoryManager
             }
         }
 
+        public OutwardsViewModel OutwardsViewModel
+        {
+            get
+            {
+                return new OutwardsViewModel(new ProductService<Product>());
+            }
+        }       
+
         public RecordsViewModel RecordsViewModel
         {
             get

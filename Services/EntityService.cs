@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public abstract class EntityService
+    public class EntityService
     {
         public virtual int Save<T>(T obj) where T : Entity
         {
@@ -134,6 +134,25 @@ namespace Services
 
                     db.SaveChanges();
                 }
+            }
+        }
+
+        public void SaveMoviment<T>(T moviment) where T: Moviment
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                db.Set<T>().Add(moviment);
+
+                db.SaveChanges();
+
+                foreach (var productMoviment in moviment.Products)
+                {
+                    productMoviment.Product = db.Products.Find(productMoviment.ProductID);
+
+                    moviment.ProductMovimentAction(productMoviment);                    
+                }
+
+                db.SaveChanges();
             }
         }
     }

@@ -8,15 +8,6 @@ namespace Domain
 {
     public class PurchaseOrder : Moviment
     {
-        public override bool ChangeInventory
-        {
-            get { return false; }
-        }
 
-
-        public override Action<Inventory, ProductMoviment> InventoryAction
-        {
-            get { return null; }
-        }
     }
 }

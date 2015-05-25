@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -82,6 +88,10 @@
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\CreateEditEntityViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\BaseMovimentViewModel.cs" />
+    <Compile Include="ViewModels\Records\ProductViewModel.cs" />
+    <Compile Include="ViewModels\Records\PropertyValidateModel.cs" />
+    <Compile Include="ViewModels\Records\RecordTestBaseViewModel.cs" />
     <Compile Include="ViewModels\Records\RecordBaseViewModel.cs" />
     <Compile Include="ViewModels\Records\RecordsLegalPeopleViewModel.cs" />
     <Compile Include="ViewModels\Records\RecordsPhysicalPeopleViewModel.cs" />
@@ -272,6 +282,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Fody.1.28.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.28.3\build\Fody.targets'))" />
   </Target>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

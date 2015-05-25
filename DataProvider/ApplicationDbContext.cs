@@ -24,6 +24,8 @@ namespace DataProvider
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Person> People { get; set; }
+
         public DbSet<LegalPerson> LegalPeople { get; set; }
 
         public DbSet<PhysicalPerson> PhysicalPeople { get; set; }
@@ -35,6 +37,8 @@ namespace DataProvider
         public DbSet<ProductMoviment> ProductMoviments { get; set; }
         
         public DbSet<Entry> Entries { get; set; }
+
+        public DbSet<Outward> Outwards { get; set; }
 
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
     }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using Domain;
+using InventoryManager.ViewModels.Records;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +16,11 @@ namespace InventoryManager
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Mapper.CreateMap<Product, ProductViewModel>();
+
+            base.OnStartup(e);
+        }
     }
 }

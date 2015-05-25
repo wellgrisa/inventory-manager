@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Entry : Moviment
+    public class Outward : Moviment
     {
         public override void ProductMovimentAction(ProductMoviment productMoviment)
         {
-            productMoviment.Product.Quantity += productMoviment.Quantity;
+            productMoviment.Product.Quantity -= productMoviment.Quantity;
         }
     }
 }

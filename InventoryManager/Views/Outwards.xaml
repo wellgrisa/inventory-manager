@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:converter="clr-namespace:InventoryManager.Converters"
              mc:Ignorable="d"
-             DataContext="{Binding EntriesViewModel, Source={StaticResource ViewModelLocator}}">
+             DataContext="{Binding OutwardsViewModel, Source={StaticResource ViewModelLocator}}">
     <Grid>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="btv" />
+            <converter:ToggleVisibilityConverter x:Key="visibilityConverter" />
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
@@ -28,8 +33,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
+                    </Grid.RowDefinitions>                    
+                    
                     <ToolBar Grid.ColumnSpan="3">
                         <Button Width="50"
                                         Height="50"
@@ -49,14 +54,44 @@
                         </Button>
                     </ToolBar>
 
-                    <Label Grid.Row="1" Content="Cliente / Requisitante" />
+                    <!--<Label Grid.Row="1" Content="Cliente / Requisitante" />
                     <TextBox Grid.Row="1" Grid.Column="1"                         
                          Controls:TextBoxHelper.Watermark="Código do Cliente / Requisitante"
-                         Style="{DynamicResource SearchMetroTextBox}" Margin="0,2,0,0" />
+                         Style="{DynamicResource SearchMetroTextBox}" Margin="0,2,0,0" />-->
+
+                    <Controls:ToggleSwitch x:Name="VisibleSwitch"
+                                   Grid.Row="1"                                     
+                                   IsChecked="False"
+                                   OnLabel="Pessoa Física"
+                                   OffLabel="Pessoa Jurídica"
+                                   Width="200"
+                                   Margin="0, 5, 0, 0" />                    
+
+                    <ComboBox Grid.Row="1" Grid.Column="1" 
+                              Name="PhysicalPersonComboBox"
+                                Style="{DynamicResource VirtualisedMetroComboBox}"
+                                Visibility="{Binding ElementName=VisibleSwitch, Path=IsChecked, Converter={StaticResource btv}}"
+                                Controls:TextBoxHelper.Watermark="Pessoa Física"
+                                DisplayMemberPath="Name"
+                                IsSynchronizedWithCurrentItem="False"
+                                IsEditable="True"   
+                                SelectedItem="SelectedPerson"
+                                ItemsSource="{Binding Path=PhysicalPeople}"                               
+                                SelectedValuePath="ID"/>
+
+                    <ComboBox Grid.Row="1" Grid.Column="1" 
+                                Style="{DynamicResource VirtualisedMetroComboBox}"
+                                Visibility="{Binding ElementName=PhysicalPersonComboBox, Path=Visibility, Converter={StaticResource visibilityConverter}}"
+                                Controls:TextBoxHelper.Watermark="Pessoa Jurídica"
+                                DisplayMemberPath="Name"
+                                IsSynchronizedWithCurrentItem="False"
+                                IsEditable="True"     
+                                SelectedItem="SelectedPerson"
+                                ItemsSource="{Binding Path=LegalPeople}"                               
+                                SelectedValuePath="ID"/>
 
                     <ComboBox  Grid.Row="1" Grid.Column="2"                                            
-                                   SelectedIndex="0"                                   
-                                   Margin="0,2,0,0">
+                                   SelectedIndex="0">
                         <ComboBoxItem Content="Doação" />                        
                         <ComboBoxItem Content="Cesta Básica" />
                         <ComboBoxItem Content="Almoço" />
@@ -66,7 +101,8 @@
 
                     <Separator Grid.Row="2" Grid.ColumnSpan="3"/>
 
-                    <Grid Grid.Row="3" Grid.ColumnSpan="3">
+                    <Grid Grid.Row="3" Grid.ColumnSpan="3"
+                          Visibility="{Binding ElementName=PhysicalPersonComboBox, Path=Visibility, Converter={StaticResource visibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -131,26 +167,46 @@
                                     </Rectangle>
                                 </Button>
                             </ToolBar>
-                        
+
 
                         <DataGrid
-                            Name="EntriesProductsGrid"
+                            Name="MovimentProductsGrid"
                             Grid.Row="2"
                             RenderOptions.ClearTypeHint="Enabled"
                             TextOptions.TextFormattingMode="Display"
                             Margin="5"
                             SelectionUnit="FullRow"
-                            ItemsSource="{Binding Path=Products}"
+                            ItemsSource="{Binding Path=MovimentProducts, Mode=TwoWay}"
                             SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"                            
-                            AutoGenerateColumns="False">
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Nome"
-                                    Binding="{Binding Name}" />
-                                <DataGridTextColumn Header="Descrição"
-                                    Binding="{Binding Description}" />
+
+                                <DataGridTemplateColumn Header="Produto" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <ComboBox
+                                                  Style="{DynamicResource VirtualisedMetroComboBox}"
+                                                  Controls:TextBoxHelper.Watermark="Produto"
+                                                  DisplayMemberPath="Name"
+                                                  IsEditable="True"                                                      
+                                                  ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                                                  SelectedValue="{Binding Path=ID}"
+                                                  SelectedValuePath="ID"
+                                                  Text="{Binding Path=Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+
                                 <Controls:DataGridNumericUpDownColumn Header="Quantidade"
                                                       Binding="{Binding Quantity}"                                                      
-                                                      Minimum="0" />
+                                                      Minimum="0"
+                                                      Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
 

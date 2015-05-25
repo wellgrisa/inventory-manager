@@ -13,30 +13,42 @@ using System.Windows.Input;
 
 namespace InventoryManager.ViewModels.Records
 {
-    public class RecordsProductsViewModel : RecordBaseViewModel<Product>
+    public class RecordsProductsViewModel : RecordTestBaseViewModel<ProductViewModel, Product>
     {
-        
-
         public ObservableCollection<Category> Categories { get; set; }
         public ObservableCollection<UnitOfMeasure> UnitOfMeasures { get; set; }
 
         public RecordsProductsViewModel()
         {
-            Categories = new ObservableCollection<Category>(_productService.GetAll<Category>());
-            UnitOfMeasures = new ObservableCollection<UnitOfMeasure>(_productService.GetAll<UnitOfMeasure>());
+            Categories = new ObservableCollection<Category>(_entityService.GetAll<Category>());
+            UnitOfMeasures = new ObservableCollection<UnitOfMeasure>(_entityService.GetAll<UnitOfMeasure>());
         }
 
-        public override ObservableCollection<Product> PopulateEntities()
-        {
-            return new ObservableCollection<Product>(_productService.GetAll("Category", "UnitOfMeasure"));
-        }
+        //public override ObservableCollection<Product> PopulateEntities()
+        //{
+        //    return new ObservableCollection<Product>(_entityService.GetAll("Category", "UnitOfMeasure"));
+        //}
 
         public override void AddCommandExecute(object obj)
         {
-            Entities.Add(new Product
+            Entities.Add(new ProductViewModel
             {
-                Name = "Nome"
+                Category = Categories.FirstOrDefault() ?? new Category(),
+                UnitOfMeasure = UnitOfMeasures.FirstOrDefault() ?? new UnitOfMeasure()
             });
-        }        
+        }
+
+        public override void OnSave()
+        {
+            //foreach (var entity in Entities)
+            //{
+            //    entity.CategoryID = entity.Category.ID;
+            //    entity.UnitOfMeasureID = entity.UnitOfMeasure.ID;
+            //    entity.Category = null;
+            //    entity.UnitOfMeasure = null;
+            //}
+
+            base.OnSave();
+        }
     }    
 }
