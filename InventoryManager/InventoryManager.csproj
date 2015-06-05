@@ -89,6 +89,9 @@
     <Compile Include="ViewModels\CreateEditEntityViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\BaseMovimentViewModel.cs" />
+    <Compile Include="ViewModels\Records\UnitOfMeasureViewModel.cs" />
+    <Compile Include="ViewModels\Records\EntityBaseViewModel.cs" />
+    <Compile Include="ViewModels\Records\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Records\ProductViewModel.cs" />
     <Compile Include="ViewModels\Records\PropertyValidateModel.cs" />
     <Compile Include="ViewModels\Records\RecordTestBaseViewModel.cs" />

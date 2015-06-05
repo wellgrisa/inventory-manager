@@ -30,10 +30,15 @@ namespace InventoryManager.ViewModels.Records
                         , validationResults))
                     return null;
 
-                HasErrors = validationResults.Any();
-
                 return validationResults.First().ErrorMessage;
             }
+        }
+
+        public bool Validate<T>(T obj) where T : PropertyValidateModel
+        {
+            var results = new List<ValidationResult>();
+
+            return Validator.TryValidateObject(obj, new ValidationContext(obj), results, true);
         }
     }
 }

@@ -59,6 +59,37 @@ namespace Services
             }
         }
 
+        public IEnumerable<T> GetAll<T>(params string[] includeItems) where T : Entity
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                if (includeItems.Any())
+                {
+                    var dbSet = db.Set<T>();
+
+                    foreach (var include in includeItems)
+                    {
+                        dbSet.Include(include).ToList();
+                    }
+
+                    return dbSet.ToList();
+                }
+
+                return db.Set<T>().ToList();
+            }
+        }   
+
+        public void SaveEntities<T>(params T[] entities) where T : Entity
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                foreach (var entity in entities)
+                {
+                    Save(entity);
+                }
+            }
+        }
+
         //public virtual ICollection<ValidationResult> Validate<T>(T obj) where T : Entity
         //{
         //    var results = new List<ValidationResult>();
@@ -105,18 +136,7 @@ namespace Services
 
                 return db.Set<T>().ToList();
             }
-        }        
-
-        public void SaveEntities(params T[] entities)
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                foreach (var entity in entities)
-                {                    
-                    Save(entity);                    
-                }
-            }
-        }
+        }    
 
         public void SaveEntry(Entry entry)
         {

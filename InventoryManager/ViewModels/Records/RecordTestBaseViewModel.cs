@@ -37,7 +37,7 @@ namespace InventoryManager.ViewModels.Records
 
             RemoveCommand = new RelayCommand(RemoveCommandExecute, o => SelectedEntity != null);
 
-            SaveCommand = new RelayCommand(SaveCommandExecute, o => CanSave(o));
+            SaveCommand = new RelayCommand(SaveCommandExecute, o => CanSave());
 
             AddCommand = new RelayCommand(AddCommandExecute);
 
@@ -46,7 +46,7 @@ namespace InventoryManager.ViewModels.Records
 
         public virtual ObservableCollection<T> PopulateEntities()
         {
-            var entities = _entityService.GetAll<TEntity>();
+            var entities = _entityService.GetAll<TEntity>("Category", "UnitOfMeasure");
 
             var entitiesViewModel = Mapper.Map<IEnumerable<TEntity>, IEnumerable<T>>(entities);
 
@@ -69,12 +69,14 @@ namespace InventoryManager.ViewModels.Records
 
         public virtual void OnSave()
         {
-            //_entityService.SaveEntities(Entities.ToArray());
+            var entities = Mapper.Map<IEnumerable<T>, IEnumerable<TEntity>>(Entities);
+            
+            _entityService.SaveEntities(entities.ToArray());
         }
 
-        public bool CanSave(object obj)
-        {
-            return Entities.All(x => !x.HasErrors);
+        public bool CanSave()
+        {            
+            return Entities.All(x => x.Validate(x));
         }
 
         private void RefreshExecute(object obj)

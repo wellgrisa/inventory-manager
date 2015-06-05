@@ -19,6 +19,13 @@ namespace InventoryManager
         protected override void OnStartup(StartupEventArgs e)
         {
             Mapper.CreateMap<Product, ProductViewModel>();
+            Mapper.CreateMap<ProductViewModel, Product>();
+
+            Mapper.CreateMap<Category, CategoryViewModel>();
+            Mapper.CreateMap<CategoryViewModel, Category>();
+
+            Mapper.CreateMap<UnitOfMeasure, UnitOfMeasureViewModel>();
+            Mapper.CreateMap<UnitOfMeasureViewModel, UnitOfMeasure>();
 
             base.OnStartup(e);
         }

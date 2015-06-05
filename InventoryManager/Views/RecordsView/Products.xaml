@@ -56,10 +56,9 @@
                                 IsSynchronizedWithCurrentItem="False"
                                 IsEditable="True"                                                      
                                 ItemsSource="{Binding Path=DataContext.Categories, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                SelectedValue="{Binding Path=CategoryID}"                                
+                                SelectedValue="{Binding Path=Category.ID}"                                
                                 SelectedValuePath="ID"
-                                SelectedItem="{Binding Path=Category}" 
-                                Text="{Binding Path=Category.Name}" />
+                                SelectedItem="{Binding Path=Category}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
@@ -79,10 +78,9 @@
                                       IsEditable="True"      
                                       IsSynchronizedWithCurrentItem="False"
                                       ItemsSource="{Binding Path=DataContext.UnitOfMeasures, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                      SelectedValue="{Binding Path=UnitOfMeasureID}"                                                  
+                                      SelectedValue="{Binding Path=UnitOfMeasure.ID}"                                                  
                                       SelectedValuePath="ID"
-                                      SelectedItem="{Binding Path=UnitOfMeasure}" 
-                                      Text="{Binding Path=UnitOfMeasure.Name}" />
+                                      SelectedItem="{Binding Path=UnitOfMeasure}"  />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
