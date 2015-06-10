@@ -21,4 +21,11 @@ namespace Domain
 
         }
     }
+
+    public enum MovimentType
+    {
+        Outward,
+        Entry,
+        PurchaseOrder
+    }
 }

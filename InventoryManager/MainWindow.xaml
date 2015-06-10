@@ -4,7 +4,7 @@
         xmlns:controls="clr-namespace:InventoryManager.Controls"
         xmlns:views="clr-namespace:InventoryManager.Views"
         xmlns:util="clr-namespace:InventoryManager.Util"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"        
         GlowBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         WindowStartupLocation="CenterScreen"
@@ -36,6 +36,7 @@
         <DataTemplate x:Key="Records">
             <views:DashboardRecords/>
         </DataTemplate>
+
 
         <util:TabTemplateSelector x:Key="TabSelector" />
         

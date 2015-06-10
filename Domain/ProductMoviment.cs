@@ -17,20 +17,7 @@ namespace Domain
         public virtual Moviment Moviment { get; set; }        
 
         public decimal Quantity { get; set; }
-    }
 
-    //public class PurchaseOrderProduct : ProductMoviment
-    //{
-
-    //}
-
-    //public class EntryProduct : ProductMoviment
-    //{
-
-    //}
-
-    //public class OutwardProduct : ProductMoviment
-    //{
-
-    //}
+        public decimal Value { get; set; }
+    }    
 }

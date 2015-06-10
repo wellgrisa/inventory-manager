@@ -14,7 +14,7 @@ namespace DataProvider
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
         public static ApplicationDbContext Create()

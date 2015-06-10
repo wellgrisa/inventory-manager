@@ -52,12 +52,23 @@
                                 </Rectangle.OpacityMask>
                             </Rectangle>
                         </Button>
+                        <Button Width="50"
+                                        Height="50"
+                                        Margin="0, 10, 0, 0"
+                                        Style="{DynamicResource MetroCircleButtonStyle}"
+                                        ToolTip="Relatório"
+                                        Command="{Binding ReportCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+                            <Rectangle Width="20"
+                                            Height="20"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"
+                                                Visual="{DynamicResource appbar_page}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>
                     </ToolBar>
-
-                    <!--<Label Grid.Row="1" Content="Cliente / Requisitante" />
-                    <TextBox Grid.Row="1" Grid.Column="1"                         
-                         Controls:TextBoxHelper.Watermark="Código do Cliente / Requisitante"
-                         Style="{DynamicResource SearchMetroTextBox}" Margin="0,2,0,0" />-->
 
                     <Controls:ToggleSwitch x:Name="VisibleSwitch"
                                    Grid.Row="1"                                     
@@ -207,6 +218,13 @@
                                                       Binding="{Binding Quantity}"                                                      
                                                       Minimum="0"
                                                       Width="*"/>
+
+                                <Controls:DataGridNumericUpDownColumn Header="Valor"
+                                                      Binding="{Binding Value}"
+                                                      Minimum="0"
+                                                      StringFormat="C"
+                                                      Width="*"/>
+
                             </DataGrid.Columns>
                         </DataGrid>
 

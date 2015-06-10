@@ -99,5 +99,7 @@ namespace InventoryManager.ViewModels
         public string Name { get; set; }
 
         public decimal Quantity { get; set; }
+
+        public decimal Value { get; set; }
     }
 }
