@@ -1,26 +1,25 @@
 ﻿using Domain;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Reports.Moviments;
 using Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+
 using System.Windows.Input;
 
 namespace InventoryManager.ViewModels
 {
-    public abstract class BaseMovimentViewModel<T> where T: Moviment
+    public abstract class BaseMovimentViewModel<T> where T : Moviment
     {
         #region Attributes
         private ProductService<Product> _productService;
         #endregion
 
         #region Properties
-        
+
         public ObservableCollection<ProductViewModel> MovimentProducts { get; set; }
 
         public ObservableCollection<Product> Products { get; set; }
@@ -33,11 +32,15 @@ namespace InventoryManager.ViewModels
 
         public ProductViewModel SelectedProduct { get; set; }
 
+        public abstract MovimentType MovimentType { get;}
+
         public ICommand AddCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand SaveCommand { get; set; }
 
-        #endregion     
+        public ICommand ReportCommand { get; set; }
+
+        #endregion
 
         #region Constructor
         public BaseMovimentViewModel(ProductService<Product> productService)
@@ -64,6 +67,8 @@ namespace InventoryManager.ViewModels
             RemoveCommand = new RelayCommand(RemoveCommandExecute, o => SelectedProduct != null);
 
             SaveCommand = new RelayCommand(SaveCommandExecute);
+
+            ReportCommand = new RelayCommand(ReportCommandExecute);
         }
 
         private void AddCommandExecute(object obj)
@@ -81,6 +86,22 @@ namespace InventoryManager.ViewModels
             ShowMessageDialog(obj as MetroWindow);
         }
 
+        private void ReportCommandExecute(object obj)
+        {
+            ToggleFlyout((obj as MetroWindow).Flyouts, 0);
+        }
+
+        private void ToggleFlyout(FlyoutsControl flyouts, int index)
+        {
+            var flyout = flyouts.Items[index] as Flyout;
+            if (flyout == null)
+            {
+                return;
+            }
+
+            flyout.IsOpen = !flyout.IsOpen;
+        }
+
         private async void ShowMessageDialog(MetroWindow sender)
         {
             var mySettings = new MetroDialogSettings()
@@ -95,15 +116,15 @@ namespace InventoryManager.ViewModels
 
             if (result == MessageDialogResult.Affirmative)
             {
-                var outward = Activator.CreateInstance<T>();
+                var moviment = Activator.CreateInstance<T>();
 
-                MovimentProducts.ToList().ForEach(x => outward.Products.Add(new ProductMoviment
+                MovimentProducts.ToList().ForEach(x => moviment.Products.Add(new ProductMoviment
                 {
                     ProductID = x.ID,
                     Quantity = x.Quantity
                 }));
 
-                _productService.SaveMoviment(outward);
+                _productService.SaveMoviment(moviment);
 
                 Clean();
             }

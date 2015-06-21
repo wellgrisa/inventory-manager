@@ -14,6 +14,8 @@ namespace InventoryManager.ViewModels
             Initialize();
         }
 
+
+
         public List<SidebarTabItem> Tabs { get; set; }
 
         private void Initialize()

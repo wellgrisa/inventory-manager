@@ -1,12 +1,8 @@
 ﻿using Domain;
 using InventoryManager.ViewModels;
+using InventoryManager.ViewModels.Flyouts;
 using InventoryManager.ViewModels.Records;
 using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManager
 {
@@ -17,6 +13,14 @@ namespace InventoryManager
             get
             {
                 return new DashboardViewModel();
+            }
+        }
+
+        public ReportFlyoutViewModel ReportFlyoutViewModel
+        {
+            get
+            {
+                return new ReportFlyoutViewModel();
             }
         }
 

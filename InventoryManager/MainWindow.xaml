@@ -14,8 +14,7 @@
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="flyoutsControl">
-            <views:CreateEditSupplier/>
-            <views:CreateEditProduct/>
+            <views:ReportFlyout/>            
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
@@ -35,6 +34,10 @@
 
         <DataTemplate x:Key="Records">
             <views:DashboardRecords/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="Reports">
+            <views:Reports/>
         </DataTemplate>
 
 

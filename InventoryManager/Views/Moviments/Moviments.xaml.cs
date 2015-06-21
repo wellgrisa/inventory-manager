@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InventoryManager.Views
+namespace InventoryManager.Views.Moviments
 {
     /// <summary>
-    /// Interaction logic for WindowTest.xaml
+    /// Interaction logic for Moviments.xaml
     /// </summary>
-    public partial class WindowTest : MetroWindow
+    public partial class Moviments : UserControl
     {
-        public WindowTest()
+        public Moviments()
         {
             InitializeComponent();
         }

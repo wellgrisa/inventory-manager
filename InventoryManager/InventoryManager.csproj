@@ -89,6 +89,7 @@
     <Compile Include="Util\TabTemplateSelector.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\CreateEditEntityViewModel.cs" />
+    <Compile Include="ViewModels\Flyouts\ReportFlyoutViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\BaseMovimentViewModel.cs" />
     <Compile Include="ViewModels\Records\UnitOfMeasureViewModel.cs" />
@@ -118,6 +119,12 @@
     <Compile Include="Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Flyouts\ReportFlyout.xaml.cs">
+      <DependentUpon>ReportFlyout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Moviments\Moviments.xaml.cs">
+      <DependentUpon>Moviments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RecordsView\LegalPeople.xaml.cs">
       <DependentUpon>LegalPeople.xaml</DependentUpon>
     </Compile>
@@ -145,8 +152,8 @@
     <Compile Include="Views\Entries.xaml.cs">
       <DependentUpon>Entries.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WindowTest.xaml.cs">
-      <DependentUpon>WindowTest.xaml</DependentUpon>
+    <Compile Include="Views\Reports.xaml.cs">
+      <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\StylishWindow.xaml">
       <SubType>Designer</SubType>
@@ -182,6 +189,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flyouts\ReportFlyout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Moviments\Moviments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,7 +236,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WindowTest.xaml">
+    <Page Include="Views\Reports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

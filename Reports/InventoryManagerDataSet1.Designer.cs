@@ -287,6 +287,8 @@ namespace Reports {
             
             private global::System.Data.DataColumn columnType;
             
+            private global::System.Data.DataColumn columnCreatedDate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public MovimentsViewDataTable() {
@@ -354,6 +356,14 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CreatedDateColumn {
+                get {
+                    return this.columnCreatedDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +399,14 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MovimentsViewRow AddMovimentsViewRow(string ProductName, decimal Quantity, decimal Value, string Type) {
+            public MovimentsViewRow AddMovimentsViewRow(string ProductName, decimal Quantity, decimal Value, string Type, System.DateTime CreatedDate) {
                 MovimentsViewRow rowMovimentsViewRow = ((MovimentsViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ProductName,
                         Quantity,
                         Value,
-                        Type};
+                        Type,
+                        CreatedDate};
                 rowMovimentsViewRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovimentsViewRow);
                 return rowMovimentsViewRow;
@@ -422,6 +433,7 @@ namespace Reports {
                 this.columnQuantity = base.Columns["Quantity"];
                 this.columnValue = base.Columns["Value"];
                 this.columnType = base.Columns["Type"];
+                this.columnCreatedDate = base.Columns["CreatedDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -435,11 +447,14 @@ namespace Reports {
                 base.Columns.Add(this.columnValue);
                 this.columnType = new global::System.Data.DataColumn("Type", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnType);
+                this.columnCreatedDate = new global::System.Data.DataColumn("CreatedDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatedDate);
                 this.columnProductName.MaxLength = 2147483647;
                 this.columnQuantity.AllowDBNull = false;
                 this.columnValue.AllowDBNull = false;
                 this.columnType.AllowDBNull = false;
                 this.columnType.MaxLength = 128;
+                this.columnCreatedDate.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -631,6 +646,17 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime CreatedDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableMovimentsView.CreatedDateColumn]));
+                }
+                set {
+                    this[this.tableMovimentsView.CreatedDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsProductNameNull() {
                 return this.IsNull(this.tableMovimentsView.ProductNameColumn);
             }
@@ -805,6 +831,7 @@ namespace Reports.InventoryManagerDataSet1TableAdapters {
             tableMapping.ColumnMappings.Add("Quantity", "Quantity");
             tableMapping.ColumnMappings.Add("Value", "Value");
             tableMapping.ColumnMappings.Add("Type", "Type");
+            tableMapping.ColumnMappings.Add("CreatedDate", "CreatedDate");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -821,17 +848,20 @@ namespace Reports.InventoryManagerDataSet1TableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        ProductName, Quantity, Value, Type\r\nFROM            MovimentsView\r\n" +
-                "WHERE        (Type = @Type)";
+            this._commandCollection[0].CommandText = "SELECT        ProductName, Quantity, Value, Type, CreatedDate\r\nFROM            Mo" +
+                "vimentsView\r\nWHERE        (Type = @Type) AND (CreatedDate >= @InitialDate) AND C" +
+                "reatedDate <= @FinalDate\r\nORDER BY CreatedDate DESC";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.NVarChar, 128, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InitialDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FinalDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(InventoryManagerDataSet1.MovimentsViewDataTable dataTable, string Type) {
+        public virtual int Fill(InventoryManagerDataSet1.MovimentsViewDataTable dataTable, string Type, System.DateTime InitialDate, System.DateTime FinalDate) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((Type == null)) {
                 throw new global::System.ArgumentNullException("Type");
@@ -839,6 +869,8 @@ namespace Reports.InventoryManagerDataSet1TableAdapters {
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((string)(Type));
             }
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(InitialDate));
+            this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(FinalDate));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -850,7 +882,7 @@ namespace Reports.InventoryManagerDataSet1TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual InventoryManagerDataSet1.MovimentsViewDataTable GetData(string Type) {
+        public virtual InventoryManagerDataSet1.MovimentsViewDataTable GetData(string Type, System.DateTime InitialDate, System.DateTime FinalDate) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((Type == null)) {
                 throw new global::System.ArgumentNullException("Type");
@@ -858,6 +890,8 @@ namespace Reports.InventoryManagerDataSet1TableAdapters {
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((string)(Type));
             }
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(InitialDate));
+            this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(FinalDate));
             InventoryManagerDataSet1.MovimentsViewDataTable dataTable = new InventoryManagerDataSet1.MovimentsViewDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

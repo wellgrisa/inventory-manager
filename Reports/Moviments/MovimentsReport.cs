@@ -1,12 +1,5 @@
 ﻿using Domain;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Reports.Moviments
@@ -14,10 +7,16 @@ namespace Reports.Moviments
     public partial class MovimentsReport : Form
     {
         private MovimentType _movimentType;
+        private DateTime _initialDate;
+        private DateTime _finalDate;
 
-        public MovimentsReport(MovimentType movimentType)
+        public MovimentsReport(MovimentType movimentType, DateTime? initialDate = null, DateTime? finalDate = null)
         {
             _movimentType = movimentType;
+
+            _initialDate = initialDate.HasValue ? initialDate.Value : DateTime.Now;
+
+            _finalDate = finalDate.HasValue ? finalDate.Value : DateTime.Now;
 
             InitializeComponent();
         }
@@ -26,7 +25,7 @@ namespace Reports.Moviments
         {
             // TODO: This line of code loads data into the 'inventoryManagerDataSet1.MovimentsView' table. You can move, or remove it, as needed.
             
-            this.movimentsViewTableAdapter1.Fill(this.inventoryManagerDataSet1.MovimentsView, _movimentType.ToString());
+            this.movimentsViewTableAdapter1.Fill(this.inventoryManagerDataSet1.MovimentsView, _movimentType.ToString(), _initialDate, _finalDate);
             // TODO: This line of code loads data into the 'inventoryManagerDataSet.MovimentsView' table. You can move, or remove it, as needed.
             //this.movimentsViewTableAdapter.Fill(this.inventoryManagerDataSet.MovimentsView);
 
